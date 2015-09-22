@@ -3,9 +3,15 @@ from bs4 import BeautifulSoup, UnicodeDammit
 from urllib.request import urlopen
 import os
 import datetime
+import time
+
 
 pitch_outfile=open("pitch_table.csv", "a+", encoding='utf-8')
 atbat_outfile=open("atbat_table.csv", "a+", encoding='utf-8')
+
+file_cont = ""
+'''while file_cont!="yes" and file_cont!="no":
+	file_cont = input("Continue files from previous spot? Type yes/no: ")'''
 
 if file_cont == "yes":
 	ll_retroid = pitch_outfile.readlines()[-1:][0].split(",")[0]
@@ -35,6 +41,10 @@ if enddate_choice_fl=="yes":
 else:
 	enddate = datetime.date.today()-datetime.timedelta(days=1)
 	
+add_pitch = ("INSERT INTO pythonpfx.pitches "
+			"(retro_game_id, st_fl, regseason_fl, playoffs_fl, game_type, game_type_des, game_id, home_team_id, home_team_lg, away_team_id, away_team_lg,interleague_fl, bat_home_id, park_id, park_name, park_lock, pit_id, bat_id, pit_hand_cd, bat_hand_cd, pa_ball_ct, pa_strike_ct, outs_ct, pitch_seq, pa_terminal_fl, pa_event_cd, start_bases_cd, end_bases_cd, event_outs_ct, ab_number, pitch_res, pitch_des, pitch_id, x, y, start_speed, end_speed, sz_top, sz_bottom, pfx_x, pfx_z, px, py, pz, x0, y0, z0, vx0, vy0, vz0, ax, ay, az, break_y, break_angle, break_length, pitch_type, type_conf, zone, spin_dir, spin_rate, sv_id)"
+			"VALUES (%(retro_game_id)s, %(st_fl)s, %(regseason_fl)s, %(playoffs_fl)s, %(game_type)s, %(game_type_des)s, %(game_id)s, %(home_team_id)s, %(home_team_lg)s, %(away_team_id)s, %(away_team_lg)s,%(interleague_fl)s, %(bat_home_id)s, %(park_id)s, %(park_name)s, %(park_lock)s, %(pit_id)s, %(bat_id)s, %(pit_hand_cd)s, %(bat_hand_cd)s, %(pa_ball_ct)s, %(pa_strike_ct)s, %(outs_ct)s, %(pitch_seq)s, %(pa_terminal_fl)s, %(pa_event_cd)s, %(start_bases_cd)s, %(end_bases_cd)s, %(event_outs_ct)s, %(ab_number)s, %(pitch_res)s, %(pitch_des)s, %(pitch_id)s, %(x)s, %(y)s, %(start_speed)s, %(end_speed)s, %(sz_top)s, %(sz_bottom)s, %(pfx_x)s, %(pfx_z)s, %(px)s, %(py)s, %(pz)s, %(x0)s, %(y0)s, %(z0)s, %(vx0)s, %(vy0)s, %(vz0)s, %(ax)s, %(ay)s, %(az)s, %(break_y)s, %(break_angle)s, %(break_length)s, %(pitch_type)s, %(type_conf)s, %(zone)s, %(spin_dir)s, %(spin_rate)s, %(sv_id)s)")
+
 if os.stat("pitch_table.csv").st_size==0:
 	pitch_outfile.write("retro_game_id,year,st_fl,regseason_fl,playoffs_fl,game_type,game_type_des,game_id,home_team_id,home_team_lg,away_team_id,away_team_lg,interleague_fl,inning,bat_home_id,park_id,park_name,park_lock,pit_id,bat_id,pit_hand_cd,bat_hand_cd,pa_ball_ct,pa_strike_ct,outs_ct,pitch_seq,pa_terminal_fl,pa_event_cd,start_bases_cd,end_bases_cd,event_outs_ct,ab_number,pitch_res,pitch_des,pitch_id,x,y,start_speed,end_speed,sz_top,sz_bottom,pfx_x,pfx_z,px,pz,x0,y0,z0,vx0,vy0,vz0,ax,ay,az,break_y,break_angle,break_length,pitch_type,pitch_type_seq,type_conf,zone,spin_dir,spin_rate,sv_id\n")
 if os.stat("atbat_table.csv").st_size==0:
@@ -68,6 +78,7 @@ for i in range(delta.days+1):
 			regseason_fl="F"
 			playoff_fl="F"
 			if BeautifulSoup(urlopen(g_url)).find("a", href="game.xml"):
+#				time.sleep(1)
 				detail_soup = BeautifulSoup(urlopen(g_url+"game.xml"))
 				if 'type' in detail_soup.game.attrs:
 					game_type = detail_soup.game["type"]
@@ -385,7 +396,7 @@ for i in range(delta.days+1):
 							else:
 								pitch_id=""
 							pitch_seq += pitch_res
-							if pitch_res=="X" or (pitch_res=="S" and event_cd==3) or (pitch_res=="B" and (event_cd==14 or event_cd==15)):
+							if pitch_res=="X" or (pitch_res=="S" and event_cd==3 and strike_tally==2) or (ball_tally==3 and pitch_res=="B" and (event_cd==14 or event_cd==15)):
 								pa_terminal_fl="T"
 							else:
 								pa_terminal_fl="F"									
@@ -778,7 +789,7 @@ for i in range(delta.days+1):
 							else:
 								pitch_id=""
 							pitch_seq += pitch_res
-							if pitch_res=="X" or (pitch_res=="S" and event_cd==3) or (pitch_res=="B" and (event_cd==14 or event_cd==15)):
+							if pitch_res=="X" or (pitch_res=="S" and event_cd==3 and strike_tally==2) or (pitch_res=="B" and (event_cd==14 or event_cd==15) and ball_tally==3):
 								pa_terminal_fl="T"
 							else:
 								pa_terminal_fl="F"									
