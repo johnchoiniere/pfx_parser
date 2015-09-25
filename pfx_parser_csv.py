@@ -408,6 +408,8 @@ for i in range(delta.days+1):
 								pitch_des=""
 							if pitch_des=="Foul":
 								pitch_res="F"
+							if pitch_des=="Called Strike":
+								pitch_res="C"
 							if 'id' in pitch.attrs:
 								pitch_id=pitch["id"]
 								comp_ct+=1
