@@ -95,9 +95,9 @@ for i in range(delta.days+1):
 			st_fl="F"
 			regseason_fl="F"
 			playoff_fl="F"
-			if BeautifulSoup(urlopen(g_url)).find("a", href="game.xml"):
+			if BeautifulSoup(urlopen(g_url),"lxml").find("a", href="game.xml"):
 #				time.sleep(1)
-				detail_soup = BeautifulSoup(urlopen(g_url+"game.xml"))
+				detail_soup = BeautifulSoup(urlopen(g_url+"game.xml"), "lxml")
 				if 'type' in detail_soup.game.attrs:
 					game_type = detail_soup.game["type"]
 				else:
@@ -961,7 +961,7 @@ for i in range(delta.days+1):
 							if pitch_res=="B":
 								if ball_tally<4:
 									ball_tally += 1
-							elif pitch_res=="S":
+							elif pitch_res=="S" or pitch_res=="C":
 								if strike_tally<3:
 									strike_tally+=1
 							elif pitch_res=="F" or pitch_res=="X":
