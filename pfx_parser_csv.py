@@ -259,9 +259,9 @@ for i in range(delta.days+1):
 								battedball_cd="P"
 							else:
 								battedball_cd=""
-						elif event_tx=="Double Play":
+						elif event_tx=="Double Play" or event_tx=="Triple Play" or event_tx=="Sacrifice Bunt D":
 							event_cd=2
-							if ab_des.lower().count("grounds")>0:
+							if ab_des.lower().count("ground")>0:
 								battedball_cd="G"
 							elif ab_des.lower().count("lines")>0:
 								battedball_cd="L"
@@ -627,22 +627,22 @@ for i in range(delta.days+1):
 							event_tx = ab["event"]
 						else:
 							event_tx = ""
-						if event_tx=="Flyout" or event_tx=="Sac Fly" or event_tx=="Sac Fly DP":
+						if event_tx=="Flyout" or event_tx=="Fly Out" or event_tx=="Sac Fly" or event_tx=="Sac Fly DP":
 							event_cd=2
 							battedball_cd="F"
-						elif event_tx=="Lineout" or event_tx=="Bunt Lineout":
+						elif event_tx=="Lineout" or event_cd=="Line Out" or event_tx=="Bunt Lineout":
 							event_cd=2
 							battedball_cd="L"
 						elif event_tx=="Pop out" or event_tx=="Pop Out" or event_tx=="Bunt Pop Out":
 							event_cd=2
 							battedball_cd="P"
-						elif event_tx=="Groundout" or event_tx=="Sac Bunt" or event_tx=="Bunt Groundout":
+						elif event_tx=="Groundout" or event_tx=="Ground Out" or event_tx=="Sac Bunt" or event_tx=="Bunt Groundout":
 							event_cd=2
 							battedball_cd="G"
 						elif event_tx=="Grounded Into DP":
 							event_cd=2
 							battedball_cd="G"
-						elif event_tx=="Forceout":
+						elif event_tx=="Forceout" or event_tx=="Force Out":
 							event_cd=2
 							if ab_des.lower().count("grounds")>0:
 								battedball_cd="G"
@@ -654,7 +654,7 @@ for i in range(delta.days+1):
 								battedball_cd="P"
 							else:
 								battedball_cd=""
-						elif event_tx=="Double Play":
+						elif event_tx=="Double Play" or event_tx=="Triple Play" or event_tx=="Sacrifice Bunt D":
 							event_cd=2
 							if ab_des.lower().count("grounds")>0:
 								battedball_cd="G"
