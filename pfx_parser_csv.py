@@ -232,16 +232,16 @@ for i in range(delta.days+1):
 						else:
 							event_tx = ""
 						event_cd=""
-						if event_tx=="Flyout" or event_tx=="Sac Fly" or event_tx=="Sac Fly DP":
+						if event_tx=="Flyout" or event_tx=="Fly Out" or event_tx=="Sac Fly" or event_tx=="Sac Fly DP":
 							event_cd=2
 							battedball_cd="F"
-						elif event_tx=="Lineout" or event_tx=="Bunt Lineout":
+						elif event_tx=="Lineout" or event_tx=="Line Out" or event_tx=="Bunt Lineout":
 							event_cd=2
 							battedball_cd="L"
 						elif event_tx=="Pop out" or event_tx=="Pop Out" or event_tx=="Bunt Pop Out":
 							event_cd=2
 							battedball_cd="P"
-						elif event_tx=="Groundout" or event_tx=="Sac Bunt" or event_tx=="Bunt Groundout":
+						elif event_tx=="Groundout" or event_tx=="Ground Out" or event_tx=="Sac Bunt" or event_tx=="Bunt Groundout":
 							event_cd=2
 							battedball_cd="G"
 						elif event_tx=="Grounded Into DP":
@@ -416,7 +416,7 @@ for i in range(delta.days+1):
 							else:
 								pitch_id=""
 							pitch_seq += pitch_res
-							if pitch_res=="X" or (pitch_res=="S" and event_cd==3 and strike_tally==2) or (ball_tally==3 and pitch_res=="B" and (event_cd==14 or event_cd==15)):
+							if pitch_res=="X" or ((pitch_res=="S" or pitch_res=="C") and event_cd==3 and strike_tally==2) or (ball_tally==3 and pitch_res=="B" and (event_cd==14 or event_cd==15)):
 								pa_terminal_fl="T"
 							else:
 								pa_terminal_fl="F"									
@@ -568,10 +568,10 @@ for i in range(delta.days+1):
 							if pitch_res=="B":
 								if ball_tally<4:
 									ball_tally += 1
-							elif pitch_res=="S":
+							elif pitch_res=="S" or pitch_res=="C" or pitch_res=="X":
 								if strike_tally<3:
 									strike_tally+=1
-							elif pitch_res=="F" or pitch_res=="X":
+							elif pitch_res=="F":
 								if strike_tally<2:
 									strike_tally+=1
 						atbat_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(active_date.month)+","+str(active_date.day)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(local_game_time)+","+str(game_id)+","+str(home_team_id)+","+str(away_team_id)+","+str(home_team_lg)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(inning_number)+","+str(bat_home_id)+","+str(top_outs)+","+str(ab_number)+","+str(pit_mlbid)+","+str(pit_hand_cd)+","+str(bat_mlbid)+","+str(bat_hand_cd)+","+str(ball_ct)+","+str(strike_ct)+","+str(pitch_seq)+","+str(pitch_type_seq)+","+str(event_outs_ct)+",\""+str(ab_des)+"\","+str(event_tx)+","+str(event_cd)+","+str(battedball_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+"\n")
@@ -656,7 +656,7 @@ for i in range(delta.days+1):
 								battedball_cd=""
 						elif event_tx=="Double Play" or event_tx=="Triple Play" or event_tx=="Sacrifice Bunt D":
 							event_cd=2
-							if ab_des.lower().count("grounds")>0:
+							if ab_des.lower().count("ground")>0:
 								battedball_cd="G"
 							elif ab_des.lower().count("lines")>0:
 								battedball_cd="L"
@@ -803,13 +803,15 @@ for i in range(delta.days+1):
 								pitch_des=""
 							if pitch_des=="Foul":
 								pitch_res="F"
+							if pitch_des=="Called Strike":
+								pitch_res="C"
 							if 'id' in pitch.attrs:
 								pitch_id=pitch["id"]
 								comp_ct+=1
 							else:
 								pitch_id=""
 							pitch_seq += pitch_res
-							if pitch_res=="X" or (pitch_res=="S" and event_cd==3 and strike_tally==2) or (pitch_res=="B" and (event_cd==14 or event_cd==15) and ball_tally==3):
+							if pitch_res=="X" or ((pitch_res=="S" or pitch_res=="C") and event_cd==3 and strike_tally==2) or (pitch_res=="B" and (event_cd==14 or event_cd==15) and ball_tally==3):
 								pa_terminal_fl="T"
 							else:
 								pa_terminal_fl="F"									
@@ -961,10 +963,10 @@ for i in range(delta.days+1):
 							if pitch_res=="B":
 								if ball_tally<4:
 									ball_tally += 1
-							elif pitch_res=="S" or pitch_res=="C":
+							elif pitch_res=="S" or pitch_res=="C" or pitch_res=="X":
 								if strike_tally<3:
 									strike_tally+=1
-							elif pitch_res=="F" or pitch_res=="X":
+							elif pitch_res=="F":
 								if strike_tally<2:
 									strike_tally+=1
 						atbat_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(active_date.month)+","+str(active_date.day)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(local_game_time)+","+str(game_id)+","+str(home_team_id)+","+str(away_team_id)+","+str(home_team_lg)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(inning_number)+","+str(bat_home_id)+","+str(bottom_outs)+","+str(ab_number)+","+str(pit_mlbid)+","+str(pit_hand_cd)+","+str(bat_mlbid)+","+str(bat_hand_cd)+","+str(ball_ct)+","+str(strike_ct)+","+str(pitch_seq)+","+str(pitch_type_seq)+","+str(event_outs_ct)+",\""+str(ab_des)+"\","+str(event_tx)+","+str(event_cd)+","+str(battedball_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+"\n")
