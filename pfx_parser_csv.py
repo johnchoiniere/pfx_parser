@@ -60,11 +60,11 @@ else:
 	enddate = datetime.date.today()-datetime.timedelta(days=1)
 	
 add_pitch = ("INSERT INTO pythonpfx.pitches "
-			"(retro_game_id, st_fl, regseason_fl, playoffs_fl, game_type, game_type_des, game_id, home_team_id, home_team_lg, away_team_id, away_team_lg,interleague_fl, bat_home_id, park_id, park_name, park_lock, pit_id, bat_id, pit_hand_cd, bat_hand_cd, pa_ball_ct, pa_strike_ct, outs_ct, pitch_seq, pa_terminal_fl, pa_event_cd, start_bases_cd, end_bases_cd, event_outs_ct, ab_number, pitch_res, pitch_des, pitch_id, x, y, start_speed, end_speed, sz_top, sz_bottom, pfx_x, pfx_z, px, py, pz, x0, y0, z0, vx0, vy0, vz0, ax, ay, az, break_y, break_angle, break_length, pitch_type, type_conf, zone, spin_dir, spin_rate, sv_id)"
-			"VALUES (%(retro_game_id)s, %(st_fl)s, %(regseason_fl)s, %(playoffs_fl)s, %(game_type)s, %(game_type_des)s, %(game_id)s, %(home_team_id)s, %(home_team_lg)s, %(away_team_id)s, %(away_team_lg)s,%(interleague_fl)s, %(bat_home_id)s, %(park_id)s, %(park_name)s, %(park_lock)s, %(pit_id)s, %(bat_id)s, %(pit_hand_cd)s, %(bat_hand_cd)s, %(pa_ball_ct)s, %(pa_strike_ct)s, %(outs_ct)s, %(pitch_seq)s, %(pa_terminal_fl)s, %(pa_event_cd)s, %(start_bases_cd)s, %(end_bases_cd)s, %(event_outs_ct)s, %(ab_number)s, %(pitch_res)s, %(pitch_des)s, %(pitch_id)s, %(x)s, %(y)s, %(start_speed)s, %(end_speed)s, %(sz_top)s, %(sz_bottom)s, %(pfx_x)s, %(pfx_z)s, %(px)s, %(py)s, %(pz)s, %(x0)s, %(y0)s, %(z0)s, %(vx0)s, %(vy0)s, %(vz0)s, %(ax)s, %(ay)s, %(az)s, %(break_y)s, %(break_angle)s, %(break_length)s, %(pitch_type)s, %(type_conf)s, %(zone)s, %(spin_dir)s, %(spin_rate)s, %(sv_id)s)")
+			"(retro_game_id, st_fl, regseason_fl, playoffs_fl, game_type, game_type_des, game_id, home_team_id, home_team_lg, away_team_id, away_team_lg,interleague_fl, bat_home_id, park_id, park_name, park_lock, pit_id, bat_id, pit_hand_cd, bat_hand_cd, pa_ball_ct, pa_strike_ct, outs_ct, pitch_seq, pa_terminal_fl, pa_event_cd, start_bases_cd, end_bases_cd, event_outs_ct, ab_number, pitch_res, pitch_des, pitch_id, x, y, start_speed, end_speed, sz_top, sz_bot, pfx_x, pfx_z, px, py, pz, x0, y0, z0, vx0, vy0, vz0, ax, ay, az, break_y, break_angle, break_length, pitch_type, type_conf, zone, spin_dir, spin_rate, sv_id)"
+			"VALUES (%(retro_game_id)s, %(st_fl)s, %(regseason_fl)s, %(playoffs_fl)s, %(game_type)s, %(game_type_des)s, %(game_id)s, %(home_team_id)s, %(home_team_lg)s, %(away_team_id)s, %(away_team_lg)s,%(interleague_fl)s, %(bat_home_id)s, %(park_id)s, %(park_name)s, %(park_lock)s, %(pit_id)s, %(bat_id)s, %(pit_hand_cd)s, %(bat_hand_cd)s, %(pa_ball_ct)s, %(pa_strike_ct)s, %(outs_ct)s, %(pitch_seq)s, %(pa_terminal_fl)s, %(pa_event_cd)s, %(start_bases_cd)s, %(end_bases_cd)s, %(event_outs_ct)s, %(ab_number)s, %(pitch_res)s, %(pitch_des)s, %(pitch_id)s, %(x)s, %(y)s, %(start_speed)s, %(end_speed)s, %(sz_top)s, %(sz_bot)s, %(pfx_x)s, %(pfx_z)s, %(px)s, %(py)s, %(pz)s, %(x0)s, %(y0)s, %(z0)s, %(vx0)s, %(vy0)s, %(vz0)s, %(ax)s, %(ay)s, %(az)s, %(break_y)s, %(break_angle)s, %(break_length)s, %(pitch_type)s, %(type_conf)s, %(zone)s, %(spin_dir)s, %(spin_rate)s, %(sv_id)s)")
 
 if os.stat("pitch_table.csv").st_size==0:
-	pitch_outfile.write("retro_game_id,year,st_fl,regseason_fl,playoffs_fl,game_type,game_type_des,game_id,home_team_id,home_team_lg,away_team_id,away_team_lg,interleague_fl,inning,bat_home_id,park_id,park_name,park_lock,pit_id,bat_id,pit_hand_cd,bat_hand_cd,pa_ball_ct,pa_strike_ct,outs_ct,pitch_seq,pa_terminal_fl,pa_event_cd,start_bases_cd,end_bases_cd,event_outs_ct,ab_number,pitch_res,pitch_des,pitch_id,x,y,start_speed,end_speed,sz_top,sz_bottom,pfx_x,pfx_z,px,pz,x0,y0,z0,vx0,vy0,vz0,ax,ay,az,break_y,break_angle,break_length,pitch_type,pitch_type_seq,type_conf,zone,spin_dir,spin_rate,sv_id\n")
+	pitch_outfile.write("retro_game_id,year,st_fl,regseason_fl,playoffs_fl,game_type,game_type_des,game_id,home_team_id,home_team_lg,away_team_id,away_team_lg,interleague_fl,inning,bat_home_id,park_id,park_name,park_lock,pit_id,bat_id,pit_hand_cd,bat_hand_cd,pa_ball_ct,pa_strike_ct,outs_ct,pitch_seq,pa_terminal_fl,pa_event_cd,start_bases_cd,end_bases_cd,event_outs_ct,ab_number,pitch_res,pitch_des,pitch_id,x,y,start_speed,end_speed,sz_top,sz_bot,pfx_x,pfx_z,px,pz,x0,y0,z0,vx0,vy0,vz0,ax,ay,az,break_y,break_angle,break_length,pitch_type,pitch_type_seq,type_conf,zone,spin_dir,spin_rate,sv_id\n")
 if os.stat("atbat_table.csv").st_size==0:
 	atbat_outfile.write("retro_game_id,year,month,day,st_fl,regseason_fl,playoff_fl,game_type,game_type_des,local_game_time,game_id,home_team_id,away_team_id,home_team_lg,away_team_lg,interleague_fl,park_id,park_name,park_location,inning_number,bat_home_id,inn_outs,ab_number,pit_mlbid,pit_hand_cd,bat_mlbid,bat_hand_cd,ball_ct,strike_ct,pitch_seq,pitch_type_seq,event_outs_ct,ab_des,event_tx,event_cd,battedball_cd,start_bases_cd,end_bases_cd\n")
 
@@ -450,11 +450,11 @@ for i in range(delta.days+1):
 								comp_ct+=1
 							else:
 								sz_top=""
-							if 'sz_bottom' in pitch.attrs:
-								sz_bottom=pitch["sz_bot"]
+							if 'sz_bot' in pitch.attrs:
+								sz_bot=pitch["sz_bot"]
 								comp_ct+=1
 							else:
-								sz_bottom=""
+								sz_bot=""
 							if 'pfx_x' in pitch.attrs:
 								pfx_x=pitch["pfx_x"]
 								comp_ct+=1
@@ -564,7 +564,7 @@ for i in range(delta.days+1):
 								comp_ct+=1
 							else:
 								spin_rate=""
-							pitch_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(game_id)+","+str(home_team_id)+","+str(home_team_lg)+","+str(away_team_id)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(inning_number)+","+str(bat_home_id)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(pit_mlbid)+","+str(bat_mlbid)+","+str(pit_hand_cd)+","+str(bat_hand_cd)+","+str(ball_tally)+","+str(strike_tally)+","+str(top_outs)+","+str(pitch_seq)+","+str(pa_terminal_fl)+","+str(event_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+","+str(event_outs_ct)+","+str(ab_number)+","+str(pitch_res)+",\""+str(pitch_des)+"\","+str(pitch_id)+","+str(x)+","+str(pitch_y)+","+str(start_speed)+","+str(end_speed)+","+str(sz_top)+","+str(sz_bottom)+","+str(pfx_x)+","+str(pfx_z)+","+str(px)+","+str(pz)+","+str(x0)+","+str(y0)+","+str(z0)+","+str(vx0)+","+str(vy0)+","+str(vz0)+","+str(ax)+","+str(ay)+","+str(az)+","+str(break_y)+","+str(break_angle)+","+str(break_length)+","+str(pitch_type)+","+str(pitch_type_seq)+","+str(type_conf)+","+str(zone)+","+str(spin_dir)+","+str(spin_rate)+","+str(sv_id)+"\n")
+							pitch_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(game_id)+","+str(home_team_id)+","+str(home_team_lg)+","+str(away_team_id)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(inning_number)+","+str(bat_home_id)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(pit_mlbid)+","+str(bat_mlbid)+","+str(pit_hand_cd)+","+str(bat_hand_cd)+","+str(ball_tally)+","+str(strike_tally)+","+str(top_outs)+","+str(pitch_seq)+","+str(pa_terminal_fl)+","+str(event_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+","+str(event_outs_ct)+","+str(ab_number)+","+str(pitch_res)+",\""+str(pitch_des)+"\","+str(pitch_id)+","+str(x)+","+str(pitch_y)+","+str(start_speed)+","+str(end_speed)+","+str(sz_top)+","+str(sz_bot)+","+str(pfx_x)+","+str(pfx_z)+","+str(px)+","+str(pz)+","+str(x0)+","+str(y0)+","+str(z0)+","+str(vx0)+","+str(vy0)+","+str(vz0)+","+str(ax)+","+str(ay)+","+str(az)+","+str(break_y)+","+str(break_angle)+","+str(break_length)+","+str(pitch_type)+","+str(pitch_type_seq)+","+str(type_conf)+","+str(zone)+","+str(spin_dir)+","+str(spin_rate)+","+str(sv_id)+"\n")
 							if pitch_res=="B":
 								if ball_tally<4:
 									ball_tally += 1
@@ -845,11 +845,11 @@ for i in range(delta.days+1):
 								comp_ct+=1
 							else:
 								sz_top=""
-							if 'sz_bottom' in pitch.attrs:
-								sz_bottom=pitch["sz_bot"]
+							if 'sz_bot' in pitch.attrs:
+								sz_bot=pitch["sz_bot"]
 								comp_ct+=1
 							else:
-								sz_bottom=""
+								sz_bot=""
 							if 'pfx_x' in pitch.attrs:
 								pfx_x=pitch["pfx_x"]
 								comp_ct+=1
@@ -959,7 +959,7 @@ for i in range(delta.days+1):
 								comp_ct+=1
 							else:
 								spin_rate=""
-							pitch_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(game_id)+","+str(home_team_id)+","+str(home_team_lg)+","+str(away_team_id)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(inning_number)+","+str(bat_home_id)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(pit_mlbid)+","+str(bat_mlbid)+","+str(pit_hand_cd)+","+str(bat_hand_cd)+","+str(ball_tally)+","+str(strike_tally)+","+str(bottom_outs)+","+str(pitch_seq)+","+str(pa_terminal_fl)+","+str(event_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+","+str(event_outs_ct)+","+str(ab_number)+","+str(pitch_res)+",\""+str(pitch_des)+"\","+str(pitch_id)+","+str(x)+","+str(pitch_y)+","+str(start_speed)+","+str(end_speed)+","+str(sz_bottom)+","+str(sz_bottom)+","+str(pfx_x)+","+str(pfx_z)+","+str(px)+","+str(pz)+","+str(x0)+","+str(y0)+","+str(z0)+","+str(vx0)+","+str(vy0)+","+str(vz0)+","+str(ax)+","+str(ay)+","+str(az)+","+str(break_y)+","+str(break_angle)+","+str(break_length)+","+str(pitch_type)+","+str(pitch_type_seq)+","+str(type_conf)+","+str(zone)+","+str(spin_dir)+","+str(spin_rate)+","+str(sv_id)+"\n")
+							pitch_outfile.write(str(retro_game_id)+","+str(active_date.year)+","+str(st_fl)+","+str(regseason_fl)+","+str(playoff_fl)+","+str(game_type)+","+str(game_type_des)+","+str(game_id)+","+str(home_team_id)+","+str(home_team_lg)+","+str(away_team_id)+","+str(away_team_lg)+","+str(interleague_fl)+","+str(inning_number)+","+str(bat_home_id)+","+str(park_id)+","+str(park_name)+",\""+str(park_loc)+"\","+str(pit_mlbid)+","+str(bat_mlbid)+","+str(pit_hand_cd)+","+str(bat_hand_cd)+","+str(ball_tally)+","+str(strike_tally)+","+str(bottom_outs)+","+str(pitch_seq)+","+str(pa_terminal_fl)+","+str(event_cd)+","+str(start_bases_cd)+","+str(end_bases_cd)+","+str(event_outs_ct)+","+str(ab_number)+","+str(pitch_res)+",\""+str(pitch_des)+"\","+str(pitch_id)+","+str(x)+","+str(pitch_y)+","+str(start_speed)+","+str(end_speed)+","+str(sz_bot)+","+str(sz_bot)+","+str(pfx_x)+","+str(pfx_z)+","+str(px)+","+str(pz)+","+str(x0)+","+str(y0)+","+str(z0)+","+str(vx0)+","+str(vy0)+","+str(vz0)+","+str(ax)+","+str(ay)+","+str(az)+","+str(break_y)+","+str(break_angle)+","+str(break_length)+","+str(pitch_type)+","+str(pitch_type_seq)+","+str(type_conf)+","+str(zone)+","+str(spin_dir)+","+str(spin_rate)+","+str(sv_id)+"\n")
 							if pitch_res=="B":
 								if ball_tally<4:
 									ball_tally += 1
